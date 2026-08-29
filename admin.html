@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Aroma Signature+</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ── Reset & Base ────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-page: #0d0d0f;
+      --bg-card: #16161a;
+      --bg-card2: #1e1e24;
+      --bg-input: #121216;
+      --border: #2a2a35;
+      --border-focus: #c9a96e;
+      --accent: #c9a96e;
+      --accent-light: #e8d5b0;
+      --accent-dark: #9e7d4a;
+      --text-primary: #f0ece4;
+      --text-second: #9a9aaa;
+      --text-muted: #5a5a6e;
+      --danger: #e05260;
+      --danger-bg: #2e1418;
+      --success: #4ade80;
+      --success-bg: #0d2214;
+      --blue: #60a5fa;
+      --blue-bg: #0d1a2e;
+      --radius-sm: 6px;
+      --radius: 10px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+      --transition: 0.2s ease;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    html {
+      font-size: 15px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-card);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-dark);
+    }
+
+    /* ── LOGIN SCREEN ────────────────────────────────────────────── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 60% 20%, #1a1208 0%, var(--bg-page) 70%);
+      padding: 1.5rem;
+    }
+
+    .login-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow), 0 0 80px rgba(201, 169, 110, 0.07);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .login-subtitle {
+      color: var(--text-second);
+      font-size: 0.85rem;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .login-lock {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .login-card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .login-card p {
+      color: var(--text-second);
+      font-size: 0.88rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .login-input-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .login-input-wrap input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .login-input-wrap input:focus {
+      border-color: var(--accent);
+    }
+
+    .login-input-wrap .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border: none;
+      border-radius: var(--radius);
+      color: #0d0d0f;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .login-credentials-hint {
+      margin-top: 1.25rem;
+      padding: 0.75rem;
+      background: var(--bg-card2);
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border: 1px dashed var(--border);
+    }
+
+    .login-credentials-hint code {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    #login-error {
+      display: none;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    /* ── DASHBOARD SCREEN ────────────────────────────────────────── */
+    #dashboard-screen {
+      display: none;
+    }
+
+    .admin-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 64px;
+      background: rgba(13, 13, 15, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .topbar-brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .topbar-badge {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.35rem;
+      background: var(--bg-card2);
+      padding: 4px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-second);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-tab-btn.is-active {
+      background: var(--accent);
+      color: #0d0d0f;
+      box-shadow: 0 2px 8px rgba(201, 169, 110, 0.3);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .topbar-link {
+      color: var(--text-second);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+
+    .topbar-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .topbar-logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-second);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.82rem;
+      transition: all var(--transition);
+    }
+
+    .topbar-logout:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* ── Main Layout ─────────────────────────────────────────────── */
+    .admin-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .tab-section {
+      display: none;
+    }
+
+    .tab-section.is-active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Page Header ─────────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .page-header-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .page-header-sub {
+      color: var(--text-second);
+      font-size: 0.88rem;
+      margin-top: 0.3rem;
+    }
+
+    .header-btn-group {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: opacity var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #0d0d0f;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-second);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-export {
+      background: var(--success-bg);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+
+    /* ── Stats Row ───────────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      width: 52px;
+      height: 52px;
+      background: var(--bg-card2);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: var(--text-second);
+      font-size: 0.82rem;
+      margin-top: 0.2rem;
+    }
+
+    .stat-card-wide {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      grid-column: span 2;
+    }
+
+    .stat-card-wide-title {
+      color: var(--text-second);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-cat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .stat-cat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .stat-cat-item:last-child {
+      border-bottom: none;
+    }
+
+    .stat-cat-name {
+      color: var(--text-primary);
+    }
+
+    .stat-cat-count {
+      background: var(--bg-card2);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+    }
+
+    /* ── Info Box ─────────────────────────────────────────────────── */
+    .info-box {
+      background: var(--blue-bg);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .info-box-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Toolbar ─────────────────────────────────────────────────── */
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .filter-select {
+      padding: 0.65rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color var(--transition);
+    }
+
+    .filter-select:focus {
+      border-color: var(--accent);
+    }
+
+    /* ── Table Card ──────────────────────────────────────────────── */
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    thead {
+      background: var(--bg-card2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .product-row {
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .product-row:last-child {
+      border-bottom: none;
+    }
+
+    .product-row:hover {
+      background: rgba(201, 169, 110, 0.04);
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      vertical-align: middle;
+    }
+
+    .td-num {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      width: 40px;
+    }
+
+    .td-img {
+      width: 60px;
+    }
+
+    .product-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .product-name-cell {
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      max-width: 280px;
+    }
+
+    .product-id-cell {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: monospace;
+      margin-top: 0.2rem;
+    }
+
+    .product-badges {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .badge-gold {
+      background: #2a2008;
+      color: #f5c842;
+      border: 1px solid #4a3a08;
+    }
+
+    .badge-green {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #1a4a2a;
+    }
+
+    .badge-blue {
+      background: var(--blue-bg);
+      color: var(--blue);
+      border: 1px solid #1a2e4a;
+    }
+
+    .cat-tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .cat-skin-care {
+      background: #1a1a2e;
+      color: #a78bfa;
+    }
+
+    .cat-facial-kits {
+      background: #2a1a1a;
+      color: #f9a8d4;
+    }
+
+    .cat-hair-care {
+      background: #1a2a1a;
+      color: #86efac;
+    }
+
+    .cat-hair-treatment {
+      background: #1a2a2a;
+      color: #67e8f9;
+    }
+
+    .cat-self-care {
+      background: #2a1a2a;
+      color: #f0abfc;
+    }
+
+    .price-current {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .price-old {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      text-decoration: line-through;
+    }
+
+    .rating-star {
+      color: #f5c842;
+    }
+
+    .review-count {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .td-actions {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .btn-action {
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+
+    .btn-edit {
+      background: rgba(201, 169, 110, 0.1);
+      border-color: rgba(201, 169, 110, 0.3);
+      color: var(--accent);
+    }
+
+    .btn-edit:hover {
+      background: rgba(201, 169, 110, 0.2);
+    }
+
+    .btn-delete {
+      background: var(--danger-bg);
+      border-color: rgba(224, 82, 96, 0.3);
+      color: var(--danger);
+    }
+
+    .btn-delete:hover {
+      background: rgba(224, 82, 96, 0.2);
+    }
+
+    .btn-move-up,
+    .btn-move-down {
+      background: var(--bg-card2);
+      border-color: var(--border);
+      color: var(--text-second);
+      padding: 0.35rem 0.5rem;
+    }
+
+    .btn-move-up:hover,
+    .btn-move-down:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-move-up:disabled,
+    .btn-move-down:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .empty-table-msg {
+      text-align: center;
+      padding: 3rem 1rem !important;
+      color: var(--text-second);
+    }
+
+    .empty-table-msg div {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .empty-table-msg small {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* ── BANNER & SHOWCASE GRIDS ─────────────────────────────────── */
+    .banners-grid,
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .banner-card,
+    .showcase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      transition: transform var(--transition), border-color var(--transition), opacity var(--transition);
+      position: relative;
+    }
+
+    .showcase-card.is-disabled,
+    .banner-card.is-disabled {
+      opacity: 0.65;
+      border-style: dashed;
+    }
+
+    .banner-card:hover,
+    .showcase-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .showcase-card.is-dragging {
+      opacity: 0.4;
+      border-color: var(--accent);
+      transform: scale(0.98);
+    }
+
+    .showcase-card.drag-over {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(201, 169, 110, 0.4);
+    }
+
+    .banner-preview-wrap {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #143D0C;
+      overflow: hidden;
+    }
+
+    .showcase-poster-wrap {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      background: #143D0C;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner-preview-img,
+    .showcase-poster-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-preview-overlay,
+    .showcase-poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(14, 38, 10, 0.85) 0%, rgba(14, 38, 10, 0.4) 60%, rgba(14, 38, 10, 0.1) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.25rem;
+      color: #fff;
+    }
+
+    .showcase-poster-overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
+      justify-content: flex-end;
+    }
+
+    .card-badge-top {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .banner-card-badge {
+      background: rgba(0, 0, 0, 0.75);
+      color: var(--accent);
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .status-pill {
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .status-pill.active {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #1a4a2a;
+    }
+
+    .status-pill.disabled {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid rgba(224, 82, 96, 0.4);
+    }
+
+    .drag-handle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      color: var(--text-second);
+      border: 1px solid var(--border);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      font-size: 14px;
+      z-index: 2;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .drag-handle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .banner-card-content,
+    .showcase-card-content {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .banner-card-tag,
+    .showcase-card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .banner-card-title,
+    .showcase-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .banner-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-second);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .banner-card-footer,
+    .showcase-card-footer {
+      padding: 0.85rem 1.25rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ── Switch Toggle Control ───────────────────────────────────── */
+    .switch-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--text-second);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: var(--border);
+      transition: .25s;
+      border-radius: 20px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      transition: .25s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--accent);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(16px);
+      background-color: #0d0d0f;
+    }
+
+    /* ── File Upload Dropzone ─────────────────────────────────────── */
+    .file-upload-box {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      background: var(--bg-input);
+      cursor: pointer;
+      transition: border-color var(--transition), background-color var(--transition);
+      position: relative;
+    }
+
+    .file-upload-box:hover,
+    .file-upload-box.dragover {
+      border-color: var(--accent);
+      background: rgba(201, 169, 110, 0.05);
+    }
+
+    .file-upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .upload-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .upload-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── SETTINGS SECTION ────────────────────────────────────────── */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .settings-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .settings-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settings-card-icon {
+      font-size: 1.5rem;
+    }
+
+    .settings-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ── VISUAL IMAGE MANAGER FOR PRODUCTS ────────────────────────── */
+    .image-manager-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .image-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .image-thumb-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-thumb-card.is-primary {
+      border: 2px solid var(--accent);
+    }
+
+    .image-thumb-card .primary-tag {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .image-thumb-actions {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .image-thumb-card:hover .image-thumb-actions {
+      opacity: 1;
+    }
+
+    .img-action-btn {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-action-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .img-action-btn.btn-del:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .add-image-bar {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* ── MODALS ──────────────────────────────────────────────────── */
+    .admin-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 740px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      animation: modalIn 0.25s ease;
+    }
+
+    .modal-card-sm {
+      max-width: 480px;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 0.25rem;
+      border-radius: 4px;
+      transition: color var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card2);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    /* ── Form Controls ───────────────────────────────────────────── */
+    .form-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-grid .span-2 {
+      grid-column: span 2;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-second);
+    }
+
+    .form-label .required {
+      color: var(--danger);
+    }
+
+    .form-label .hint {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .form-error-msg {
+      display: none;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────── */
+    #admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(135deg, #143D0C, #0d2214);
+      border: 1px solid #4ade80;
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #admin-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── Shake Animation ─────────────────────────────────────────── */
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .admin-topbar {
+        padding: 0 1rem;
+        flex-wrap: wrap;
+        height: auto;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        gap: 0.5rem;
+      }
+
+      .admin-main {
+        padding: 1rem;
+      }
+
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid .span-2 {
+        grid-column: span 1;
+      }
+
+      .stat-card-wide {
+        grid-column: span 1;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .td-actions {
+        flex-direction: column;
+      }
+
+      .banners-grid,
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  LOGIN SCREEN                                                             -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">Aroma Signature+</div>
+      <div class="login-subtitle">Admin Dashboard</div>
+      <div class="login-lock">🔐</div>
+      <h2>Sign In to Admin</h2>
+      <p>Enter your password to manage catalog, slideshows & settings</p>
+      <div class="login-input-wrap">
+        <span class="input-icon">🔑</span>
+        <input type="password" id="admin-password-input" placeholder="Enter admin password"
+          onkeydown="if(event.key==='Enter') adminLogin()" autocomplete="current-password">
+      </div>
+      <button class="login-btn" onclick="adminLogin()">Enter Dashboard →</button>
+      <div id="login-error">❌ Incorrect password. Try again.</div>
+      <div class="login-credentials-hint">
+        Default Password: <code>aroma2024</code> (changeable in Settings)
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  DASHBOARD SCREEN                                                         -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="dashboard-screen">
+
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div class="topbar-brand">
+        <span class="topbar-brand-name">Aroma Signature+</span>
+        <span class="topbar-badge">Admin</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="nav-tab-btn is-active" id="tab-btn-products" onclick="switchTab('products')">
+          📦 Products
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-banners" onclick="switchTab('banners')">
+          🖼️ Hero Banners
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-showcase" onclick="switchTab('showcase')">
+          🌟 Showcase Slideshow
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-settings" onclick="switchTab('settings')">
+          ⚙️ Settings & Security
+        </button>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="topbar-link" onclick="openPasswordModal()">🔑 Change Password</button>
+        <a href="index.html" target="_blank" class="topbar-link">🌐 Live Site</a>
+        <button class="topbar-logout" onclick="adminLogout()">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <!-- TAB 1: PRODUCTS MANAGEMENT                                         -->
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <div id="section-products" class="tab-section is-active">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-header-title">Product Catalog</h1>
+            <p class="page-header-sub">Manage products, pack sizes, prices, and photo galleries (instant live sync)</p>
+          </div>
+          <div class="header-btn-group">
+            <button class="btn btn-outline" onclick="resetProductsToOriginal()">↩️ Reset Catalog</button>
+            <button class="btn btn-export" onclick="exportProducts()">📤 Export Backup</button>
+            <button class="btn btn-primary" onclick="openAddModal()">➕ Add Product</button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <span class="info-box-icon">⚡</span>
+          <div>
+            <strong>Instant Database Sync:</strong> Every change you save here updates the live website catalog and prices immediately with zero caching delay!
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div>
+              <div class="stat-value" id="stat-total">0</div>
+              <div class="stat-label">Total Products</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div>
+              <div class="stat-value" id="stat-bestsellers">0</div>
+              <div class="stat-label">Best Sellers</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🆕</div>
+            <div>
+              <div class="stat-value" id="stat-new">0</div>
+              <div class="stat-label">New Arrivals</div>
+            </div>
+          </div>
+          <div class="stat-card-wide">
+            <div class="stat-card-wide-title">Products by Category</div>
+            <div class="stat-cat-list" id="stat-categories"></div>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="table-toolbar">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="search" placeholder="Search products by name, category, type…"
+              oninput="handleSearch(this.value)">
+          </div>
+          <select class="filter-select" onchange="handleCategoryFilter(this.value)">
+            <option value="all">All Categories</option>
+            <option value="skin-care">Skin Care</option>
+            <option value="facial-kits">Facial Kits</option>
+            <option value="hair-care">Hair Care</option>
+            <option value="hair-treatment">Hair Treatment</option>
+            <option value="self-care">Self Care</option>
+          </select>
+        </div>
+
+        <!-- Products Table -->
+        <div class="table-card">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>IMG</th>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Rating</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="product-table-body">
+                <tr>
+                  <td colspan="7" class="empty-table-msg">
+                    <div>Loading products…</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <!-- TAB 2: HERO CAROUSEL BANNERS MANAGEMENT                            -->
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <div id="section-banners" class="tab-section">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-header-title">Hero Carousel Banners</h1>
+            <p class="page-header-sub">Add, edit, delete, and reorder homepage top promotional hero slides</p>
+          </div>
+          <div class="header-btn-group">
+            <button class="btn btn-outline" onclick="resetBannersToOriginal()">↩️ Reset Banners</button>
+            <button class="btn btn-export" onclick="exportBanners()">📤 Export Backup</button>
+            <button class="btn btn-primary" onclick="openAddBannerModal()">➕ Add Banner Slide</button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <span class="info-box-icon">🖼️</span>
+          <div>
+            <strong>Instant Hero Sync:</strong> Add banner slides with custom tags, headlines, and call-to-action buttons. Any edits are reflected on the homepage immediately.
+          </div>
+        </div>
+
+        <!-- Banners Grid -->
+        <div class="banners-grid" id="banners-grid-container">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <!-- TAB 3: BOTANICAL SHOWCASE SLIDESHOW MANAGEMENT                      -->
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <div id="section-showcase" class="tab-section">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-header-title">Botanical Facial & Skin Showcase</h1>
+            <p class="page-header-sub">Manage the interactive product showcase carousel posters on the homepage</p>
+          </div>
+          <div class="header-btn-group">
+            <button class="btn btn-outline" onclick="resetShowcaseToOriginal()">↩️ Reset Showcase</button>
+            <button class="btn btn-export" onclick="exportShowcase()">📤 Export Backup</button>
+            <button class="btn btn-primary" onclick="openAddShowcaseModal()">➕ Upload New Poster</button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <span class="info-box-icon">🌟</span>
+          <div>
+            <strong>Slideshow Manager:</strong> Upload posters, drag & drop to reorder, enable/disable individual slides, or delete with confirmation. Changes appear on the homepage immediately upon saving.
+          </div>
+        </div>
+
+        <!-- Showcase Grid -->
+        <div class="showcase-grid" id="showcase-grid-container">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <!-- TAB 4: SETTINGS & SECURITY                                         -->
+      <!-- ────────────────────────────────────────────────────────────────── -->
+      <div id="section-settings" class="tab-section">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-header-title">Website Settings & Security</h1>
+            <p class="page-header-sub">Configure announcement bar, contact information, and admin password</p>
+          </div>
+          <div class="header-btn-group">
+            <button class="btn btn-primary" onclick="saveSiteSettingsForm()">💾 Save Website Settings</button>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+
+          <!-- Announcement Bar Card -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <span class="settings-card-icon">📢</span>
+              <h3 class="settings-card-title">Announcement Bar</h3>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label class="switch-wrap">
+                <span class="toggle-switch">
+                  <input type="checkbox" id="set-show-announcement">
+                  <span class="toggle-slider"></span>
+                </span>
+                <span>Enable Top Announcement Bar</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Announcement Text</label>
+              <input type="text" id="set-announcement-text" class="form-input"
+                placeholder="e.g. FREE DELIVERY ON ONLINE ORDERS">
+            </div>
+          </div>
+
+          <!-- Contact & Business Card -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <span class="settings-card-icon">📞</span>
+              <h3 class="settings-card-title">Contact & Business Details</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-2">
+                <label class="form-label">Brand Name</label>
+                <input type="text" id="set-brand-name" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp Number (e.g. 918086339777)</label>
+                <input type="text" id="set-whatsapp" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="text" id="set-phone" class="form-input">
+              </div>
+              <div class="form-group span-2">
+                <label class="form-label">Contact Email</label>
+                <input type="email" id="set-email" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Card -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <span class="settings-card-icon">🌐</span>
+              <h3 class="settings-card-title">Social Media Links</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-2">
+                <label class="form-label">Instagram URL</label>
+                <input type="url" id="set-instagram" class="form-input">
+              </div>
+              <div class="form-group span-2">
+                <label class="form-label">Facebook URL</label>
+                <input type="url" id="set-facebook" class="form-input">
+              </div>
+              <div class="form-group span-2">
+                <label class="form-label">YouTube URL</label>
+                <input type="url" id="set-youtube" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Security & Password Card -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <span class="settings-card-icon">🔐</span>
+              <h3 class="settings-card-title">Admin Password Management</h3>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-second); margin-bottom: 1rem;">
+              Change the password used to log in to this Admin Panel.
+            </p>
+            <div class="form-group" style="margin-bottom: 0.75rem;">
+              <label class="form-label">New Password</label>
+              <input type="password" id="set-new-password" class="form-input" placeholder="Enter new password">
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label class="form-label">Confirm New Password</label>
+              <input type="password" id="set-confirm-password" class="form-input" placeholder="Re-enter new password">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="handlePasswordChangeFromSettings()">
+              🔑 Update Admin Password
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  ADD / EDIT PRODUCT MODAL                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="product-modal" class="admin-modal">
+    <div class="modal-card">
+
+      <div class="modal-header">
+        <h2 id="modal-title">Add Product</h2>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="form-error" class="form-error-msg"></div>
+
+        <form id="product-form" onsubmit="return false">
+
+          <!-- ── Basic Info ──────────────────────────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">📋 Basic Information</div>
+            <div class="form-grid">
+
+              <div class="form-group span-2">
+                <label class="form-label">Product Name <span class="required">*</span></label>
+                <input type="text" id="f-name" class="form-input" placeholder="e.g. Vitamin C Brightening Face Wash">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Product ID <span class="required">*</span> <span
+                    class="hint">(auto-generated)</span></label>
+                <input type="text" id="f-id" class="form-input" placeholder="e.g. vitamin-c-face-wash">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category <span class="required">*</span></label>
+                <select id="f-category" class="form-select">
+                  <option value="">— Select Category —</option>
+                  <option value="skin-care">Skin Care</option>
+                  <option value="facial-kits">Facial Kits</option>
+                  <option value="hair-care">Hair Care</option>
+                  <option value="hair-treatment">Hair Treatment</option>
+                  <option value="self-care">Self Care</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Product Type</label>
+                <input type="text" id="f-product-type" class="form-input"
+                  placeholder="e.g. Face Wash, Facial Kit, Shampoo">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Price (₹) <span class="required">*</span></label>
+                <input type="number" id="f-price" class="form-input" placeholder="e.g. 599" min="0">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Old Price (₹) <span class="hint">(for strike-through)</span></label>
+                <input type="number" id="f-old-price" class="form-input" placeholder="e.g. 799" min="0">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Rating <span class="hint">(1–5)</span></label>
+                <input type="number" id="f-rating" class="form-input" placeholder="e.g. 4.8" min="1" max="5" step="0.1">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Review Count</label>
+                <input type="number" id="f-review-count" class="form-input" placeholder="e.g. 142" min="0">
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── Visual Photos / Images Manager ──────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">🖼️ Product Photos & Gallery</div>
+
+            <div class="image-manager-box">
+              <label class="form-label" style="margin-bottom: 0.5rem;">Current Photos <span class="hint">(First image is
+                  Primary cover photo)</span></label>
+              <div class="image-gallery-grid" id="product-images-preview-grid">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <div class="add-image-bar">
+                <input type="text" id="f-new-image-input" class="form-input"
+                  placeholder="Enter image path e.g. Images/Gold Scrub.jpg">
+                <button type="button" class="btn btn-outline" onclick="addPhotoToProductForm()">➕ Add Photo</button>
+              </div>
+
+              <div style="margin-top: 0.75rem;">
+                <label class="btn btn-outline" style="cursor: pointer; display: inline-flex;">
+                  📁 Upload Photo from Device
+                  <input type="file" accept="image/*" style="display: none;" onchange="handleProductImageUpload(event)">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 0.75rem;">
+              <label class="form-label">Or edit image paths manually <span class="hint">(one path per
+                  line)</span></label>
+              <textarea id="f-images" class="form-textarea" rows="2"
+                placeholder="Images/gold.jpg&#10;Images/Gold Scrub.jpg" oninput="syncImagesFromTextarea()"></textarea>
+            </div>
+          </div>
+
+          <!-- ── Description ────────────────────────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">📝 Descriptions</div>
+            <div class="form-grid">
+
+              <div class="form-group span-2">
+                <label class="form-label">Short Description <span class="hint">(shown on product card)</span></label>
+                <textarea id="f-description" class="form-textarea" rows="2"
+                  placeholder="Brief summary shown on product cards…"></textarea>
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Full Description <span class="hint">(shown on product detail
+                    page)</span></label>
+                <textarea id="f-full-description" class="form-textarea" rows="3"
+                  placeholder="Comprehensive product details for the single product page…"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── Variants & Concerns ────────────────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">📐 Packs & Variants</div>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label class="form-label">Pack Options <span class="hint">(one per line)</span></label>
+                <textarea id="f-packs" class="form-textarea" rows="3"
+                  placeholder="Single Use Kit (50g)&#10;Salon Pack (250g)"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Pack Prices (₹) <span class="hint">(one per line, same order)</span></label>
+                <textarea id="f-pack-prices" class="form-textarea" rows="3" placeholder="1299&#10;2273"></textarea>
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Concerns / Use Cases <span class="hint">(one per line)</span></label>
+                <textarea id="f-concerns" class="form-textarea" rows="2"
+                  placeholder="Dull Skin&#10;Uneven Tone&#10;Special Occasion Glow"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── Details ────────────────────────────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">🧪 Product Details</div>
+            <div class="form-grid">
+
+              <div class="form-group span-2">
+                <label class="form-label">Skin / Hair Type</label>
+                <input type="text" id="f-skin-type" class="form-input"
+                  placeholder="e.g. All Skin Types / Dry & Sensitive Hair">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Key Ingredients</label>
+                <input type="text" id="f-ingredients" class="form-input"
+                  placeholder="e.g. Vitamin C, Orange Peel Oil, Niacinamide">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">How to Use</label>
+                <textarea id="f-how-to-use" class="form-textarea" rows="2"
+                  placeholder="Step-by-step usage instructions…"></textarea>
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Benefits</label>
+                <textarea id="f-benefits" class="form-textarea" rows="2"
+                  placeholder="Key benefits of the product…"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── Flags ──────────────────────────────────────────────── -->
+          <div class="form-section">
+            <div class="form-section-title">🏷️ Product Flags</div>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="f-is-bestseller">
+                ⭐ Best Seller
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="f-is-featured">
+                ✦ Featured
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="f-is-new">
+                🆕 New Arrival
+              </label>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProduct()">💾 Save Product</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  ADD / EDIT HERO BANNER MODAL                                             -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="banner-modal" class="admin-modal">
+    <div class="modal-card">
+
+      <div class="modal-header">
+        <h2 id="banner-modal-title">Add Carousel Banner Slide</h2>
+        <button class="modal-close" onclick="closeBannerModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="banner-form-error" class="form-error-msg"></div>
+
+        <form id="banner-form" onsubmit="return false">
+
+          <div class="form-section">
+            <div class="form-section-title">🖼️ Banner Photo & Preview</div>
+            
+            <div class="form-group">
+              <label class="form-label">Image Path or URL <span class="required">*</span></label>
+              <input type="text" id="bf-image" class="form-input"
+                placeholder="e.g. Images/Banner.png or upload below" oninput="updateBannerLivePreview()">
+            </div>
+
+            <div style="margin-top: 0.5rem; margin-bottom: 0.75rem;">
+              <label class="btn btn-outline" style="cursor: pointer; display: inline-flex;">
+                📁 Upload Banner Image
+                <input type="file" accept="image/*" style="display: none;" onchange="handleBannerImageUpload(event)">
+              </label>
+            </div>
+
+            <div style="margin-top: 0.75rem;">
+              <label class="form-label">Live Preview:</label>
+              <div class="banner-preview-wrap" style="border-radius: var(--radius-sm); margin-top: 0.25rem;">
+                <img id="bf-preview-img" src="Images/Banner.png" class="banner-preview-img" alt="Preview"
+                  onerror="this.src='Images/Banner.png'">
+                <div class="banner-preview-overlay">
+                  <span class="banner-card-tag" id="bf-preview-tag">✦ Tag Line</span>
+                  <h3 class="banner-card-title" id="bf-preview-title" style="color:#FFF;">Banner Title</h3>
+                  <p class="banner-card-desc" id="bf-preview-desc" style="color:#DDD;">Short description text</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">📝 Banner Content</div>
+            <div class="form-grid">
+
+              <div class="form-group span-2">
+                <label class="form-label">Subtitle / Top Tag</label>
+                <input type="text" id="bf-subtitle" class="form-input"
+                  placeholder="e.g. ✦ Nourish • Revive • Glow Naturally ✦" oninput="updateBannerLivePreview()">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Main Heading / Title <span class="hint">(Supports &lt;span&gt; highlight
+                    &lt;/span&gt;)</span></label>
+                <input type="text" id="bf-title" class="form-input"
+                  placeholder="e.g. Elevate Your <span>Natural Glow</span>" oninput="updateBannerLivePreview()">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Short Description</label>
+                <textarea id="bf-desc" class="form-textarea" rows="2"
+                  placeholder="Indulge in premium botanical skincare, spa facial kits…"
+                  oninput="updateBannerLivePreview()"></textarea>
+              </div>
+
+              <div class="form-group span-2">
+                <label class="switch-wrap">
+                  <span class="toggle-switch">
+                    <input type="checkbox" id="bf-enabled" checked>
+                    <span class="toggle-slider"></span>
+                  </span>
+                  <span>Enable this slide on homepage</span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">🔗 Call-to-Action Buttons</div>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label class="form-label">Button 1 Label</label>
+                <input type="text" id="bf-cta-text" class="form-input" placeholder="e.g. Explore Collection">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Button 1 Link URL</label>
+                <input type="text" id="bf-cta-url" class="form-input" placeholder="e.g. shop.html">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Button 2 Label (Optional)</label>
+                <input type="text" id="bf-cta-text2" class="form-input" placeholder="e.g. Facial Kits">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Button 2 Link URL (Optional)</label>
+                <input type="text" id="bf-cta-url2" class="form-input" placeholder="e.g. categories/facial-kits.html">
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeBannerModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveBannerSlide()">💾 Save Banner Slide</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  ADD / EDIT SHOWCASE POSTER MODAL                                         -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="showcase-modal" class="admin-modal">
+    <div class="modal-card">
+
+      <div class="modal-header">
+        <h2 id="showcase-modal-title">Upload Slideshow Poster</h2>
+        <button class="modal-close" onclick="closeShowcaseModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="showcase-form-error" class="form-error-msg"></div>
+
+        <form id="showcase-form" onsubmit="return false">
+
+          <!-- Image Upload / Path -->
+          <div class="form-section">
+            <div class="form-section-title">🖼️ Poster Image & Upload</div>
+            
+            <div class="file-upload-box" id="showcase-dropzone">
+              <input type="file" id="sf-file" class="file-upload-input" accept="image/*" onchange="handleShowcaseImageUpload(event)">
+              <div class="upload-icon">📸</div>
+              <div class="upload-title">Click to browse or drop poster image here</div>
+              <div class="upload-subtitle">Supports JPG, PNG, WEBP — automatically optimized for fast loading</div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1rem;">
+              <label class="form-label">Or specify Image Path / URL <span class="required">*</span></label>
+              <input type="text" id="sf-img" class="form-input"
+                placeholder="e.g. Images/Coursel/Bridal.jpg.png" oninput="updateShowcaseLivePreview()">
+            </div>
+
+            <div style="margin-top: 1rem;">
+              <label class="form-label">Live Carousel Preview:</label>
+              <div class="showcase-poster-wrap" style="border-radius: var(--radius-sm); margin-top: 0.25rem; max-width: 320px; margin: 0.5rem auto 0;">
+                <img id="sf-preview-img" src="Images/Coursel/Bridal.jpg.png" class="showcase-poster-img" alt="Preview"
+                  onerror="this.src='Images/logo.png'">
+                <div class="showcase-poster-overlay">
+                  <span class="showcase-card-tag" id="sf-preview-tag">Facial Kit</span>
+                  <h3 class="showcase-card-title" id="sf-preview-title" style="color:#FFF;">Bridal Glow Facial Kit</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide Details -->
+          <div class="form-section">
+            <div class="form-section-title">📝 Slide Information</div>
+            <div class="form-grid">
+
+              <div class="form-group span-2">
+                <label class="form-label">Poster Title <span class="required">*</span></label>
+                <input type="text" id="sf-title" class="form-input"
+                  placeholder="e.g. Bridal Glow Facial Kit" oninput="updateShowcaseLivePreview()">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="form-label">Category / Tag <span class="required">*</span></label>
+                <input type="text" id="sf-category" class="form-input"
+                  placeholder="e.g. Facial Kit or Skin Care" oninput="updateShowcaseLivePreview()">
+              </div>
+
+              <div class="form-group span-2">
+                <label class="switch-wrap">
+                  <span class="toggle-switch">
+                    <input type="checkbox" id="sf-enabled" checked>
+                    <span class="toggle-slider"></span>
+                  </span>
+                  <span>Enable this slide on homepage showcase carousel</span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeShowcaseModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveShowcaseSlide()">💾 Save Slideshow Poster</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <!--  CHANGE PASSWORD MODAL                                                    -->
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="password-modal" class="admin-modal">
+    <div class="modal-card modal-card-sm">
+
+      <div class="modal-header">
+        <h2>🔑 Change Admin Password</h2>
+        <button class="modal-close" onclick="closePasswordModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="password-error" class="form-error-msg"></div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">New Password <span class="required">*</span></label>
+          <input type="password" id="modal-new-pw" class="form-input" placeholder="Enter new password">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm New Password <span class="required">*</span></label>
+          <input type="password" id="modal-confirm-pw" class="form-input" placeholder="Re-enter new password">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closePasswordModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveNewPasswordFromModal()">Update Password</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Toast Notification -->
+  <div id="admin-toast"></div>
+
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+
+</html>

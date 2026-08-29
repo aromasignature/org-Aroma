@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aroma Signature+ | Premium Beauty Care</title>
+  <meta name="description"
+    content="Discover premium skincare, facial kits, hair care & self-care products crafted with nature's finest ingredients. Aroma Signature+ — Symbol of Beauty.">
+  <link rel="canonical" href="https://www.aromasignature.in/index.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aroma Signature+">
+  <meta property="og:title" content="Aroma Signature+ | Premium Botanical Beauty & Personal Care">
+  <meta property="og:description"
+    content="Discover premium skincare, facial kits, hair care & self-care products crafted with nature's finest ingredients. Aroma Signature+ — Symbol of Beauty.">
+  <meta property="og:url" content="https://www.aromasignature.in/index.html">
+  <meta property="og:image" content="https://www.aromasignature.in/Images/Banner1.jpg">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aroma Signature+ | Premium Botanical Beauty & Personal Care">
+  <meta name="twitter:description"
+    content="Discover premium skincare, facial kits, hair care & self-care products crafted with nature's finest ingredients.">
+  <meta name="twitter:image" content="https://www.aromasignature.in/Images/Banner1.jpg">
+
+  <!-- Performance Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/favicon.png">
+  <link rel="apple-touch-icon" href="Images/apple-touch-icon.svg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Structured Data JSON-LD (Organization & WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.aromasignature.in/#organization",
+        "name": "Aroma Signature+",
+        "url": "https://www.aromasignature.in",
+        "logo": "https://www.aromasignature.in/Images/logo.png",
+        "telephone": "8086339777",
+        "email": "aromasignature.in@gmail.com",
+        "sameAs": [
+          "https://www.instagram.com/aromasignature_plus/",
+          "https://www.facebook.com/aromasignatureplus",
+          "https://www.youtube.com/@aromasignatureplus"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.aromasignature.in/#website",
+        "url": "https://www.aromasignature.in",
+        "name": "Aroma Signature+",
+        "publisher": { "@id": "https://www.aromasignature.in/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.aromasignature.in/shop.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- 1. Announcement Bar & 2. Header -->
+  <div id="header-mount"></div>
+
+  <!-- Homepage Main Sections -->
+  <main id="main-content">
+    <!-- 3. Promotional Hero Banner -->
+    <div id="hero-mount"></div>
+
+    <!-- Phase 7: Trust Guarantee Bar -->
+    <div id="trust-mount"></div>
+
+    <!-- 4. Benefits & Features Section ("In The Goodness Of Non-Toxic Beauty") -->
+    <div id="benefits-mount"></div>
+
+    <!-- 5. Product Showcase Carousel (MUST appear AFTER Benefits section) -->
+    <div id="carousel-mount"></div>
+
+    <!-- 6. Phase 3: Homepage Category Product Sections -->
+    <div id="product-sections-mount"></div>
+
+    <!-- Phase 7: Customer Before & After -->
+    <div id="before-after-mount"></div>
+
+    <!-- Phase 7: Customer Reviews -->
+    <div id="reviews-mount"></div>
+
+    <!-- Phase 7: About Aroma Signature+ -->
+    <div id="about-section-mount"></div>
+
+    <!-- Phase 7: FAQ Accordion -->
+    <div id="faq-mount"></div>
+  </main>
+
+  <!-- 10. Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/product.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Render Homepage Sections
+    document.addEventListener("DOMContentLoaded", () => {
+      // Phase 2 Sections
+      const heroMount = document.getElementById("hero-mount");
+      if (heroMount) {
+        heroMount.innerHTML = UIComponents.renderHeroBanner();
+        if (typeof HeroCarousel !== 'undefined') HeroCarousel.init();
+      }
+
+      const trustMount = document.getElementById("trust-mount");
+      if (trustMount) trustMount.innerHTML = UIComponents.renderTrustSection();
+
+      const benefitsMount = document.getElementById("benefits-mount");
+      if (benefitsMount) benefitsMount.innerHTML = UIComponents.renderBenefitsSection();
+
+      const carouselMount = document.getElementById("carousel-mount");
+      if (carouselMount) carouselMount.innerHTML = UIComponents.renderProductCarousel();
+
+      // Phase 3 Product Sections
+      const productSectionsMount = document.getElementById("product-sections-mount");
+      if (productSectionsMount) productSectionsMount.innerHTML = UIComponents.renderHomepageProductSections();
+
+      // Phase 7 Sections
+      const beforeAfterMount = document.getElementById("before-after-mount");
+      if (beforeAfterMount) beforeAfterMount.innerHTML = UIComponents.renderBeforeAfterSection();
+
+      const reviewsMount = document.getElementById("reviews-mount");
+      if (reviewsMount) reviewsMount.innerHTML = UIComponents.renderCustomerReviewsSection();
+
+      const aboutSectionMount = document.getElementById("about-section-mount");
+      if (aboutSectionMount) aboutSectionMount.innerHTML = UIComponents.renderAboutSection();
+
+      const faqMount = document.getElementById("faq-mount");
+      if (faqMount) faqMount.innerHTML = UIComponents.renderFAQSection();
+    });
+  </script>
+</body>
+
+</html>

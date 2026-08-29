@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Aroma Signature+ | Symbol of Beauty</title>
+  <meta name="description" content="Learn about Aroma Signature+ — Indian premium botanical beauty brand dedicated to purity, clean formulations, and salon-quality skin wellness.">
+  <link rel="canonical" href="https://www.aromasignatureplus.com/about.html">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aroma Signature+">
+  <meta property="og:title" content="About Aroma Signature+ | Symbol of Beauty">
+  <meta property="og:description" content="Learn about Aroma Signature+ — Indian premium botanical beauty brand dedicated to purity, clean formulations, and skin wellness.">
+  <meta property="og:url" content="https://www.aromasignatureplus.com/about.html">
+  <meta property="og:image" content="https://www.aromasignatureplus.com/Images/Banner1.jpg">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Aroma Signature+ | Symbol of Beauty">
+  <meta name="twitter:description" content="Learn about Aroma Signature+ — Indian premium botanical beauty brand dedicated to purity and clean formulations.">
+  <meta name="twitter:image" content="https://www.aromasignatureplus.com/Images/Banner1.jpg">
+
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/favicon.png">
+  <link rel="apple-touch-icon" href="Images/apple-touch-icon.svg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="subtitle-tag">Symbol of Beauty</span>
+      <h1 class="page-hero-title">About Aroma Signature+</h1>
+      <p class="page-hero-subtitle">Crafting botanical skincare and professional hair care powered by nature and backed by modern science.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <!-- Phase 7: About Section -->
+    <div id="about-section-mount"></div>
+
+    <!-- Phase 7: Trust Section -->
+    <div id="trust-mount"></div>
+
+    <!-- Phase 7: FAQ Accordion -->
+    <div id="faq-mount"></div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const aboutSectionMount = document.getElementById("about-section-mount");
+      if (aboutSectionMount) aboutSectionMount.innerHTML = UIComponents.renderAboutSection();
+
+      const trustMount = document.getElementById("trust-mount");
+      if (trustMount) trustMount.innerHTML = UIComponents.renderTrustSection();
+
+      const faqMount = document.getElementById("faq-mount");
+      if (faqMount) faqMount.innerHTML = UIComponents.renderFAQSection();
+    });
+  </script>
+</body>
+</html>

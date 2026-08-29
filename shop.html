@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Botanical Beauty Products | Aroma Signature+</title>
+  <meta name="description" content="Browse our complete range of premium botanical skincare, facial kits, hair care, and self-care essentials. Free delivery on all orders across India.">
+  <link rel="canonical" href="https://www.aromasignatureplus.com/shop.html">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aroma Signature+">
+  <meta property="og:title" content="Shop All Botanical Beauty Products | Aroma Signature+">
+  <meta property="og:description" content="Browse our complete range of premium botanical skincare, facial kits, hair care, and self-care essentials.">
+  <meta property="og:url" content="https://www.aromasignatureplus.com/shop.html">
+  <meta property="og:image" content="https://www.aromasignatureplus.com/Images/Banner1.jpg">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shop All Botanical Beauty Products | Aroma Signature+">
+  <meta name="twitter:description" content="Browse our complete range of premium botanical skincare, facial kits, hair care, and self-care essentials.">
+  <meta name="twitter:image" content="https://www.aromasignatureplus.com/Images/Banner1.jpg">
+
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/favicon.png">
+  <link rel="apple-touch-icon" href="Images/apple-touch-icon.svg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Structured Data JSON-LD (CollectionPage / ItemList) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Shop All Botanical Beauty Products",
+    "url": "https://www.aromasignatureplus.com/shop.html",
+    "description": "Browse our complete range of premium botanical skincare, facial kits, hair care, and self-care essentials."
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Mounted Header & Announcement Bar -->
+  <div id="header-mount"></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="subtitle-tag">Botanical Collections</span>
+      <h1 class="page-hero-title">Our Complete Collection</h1>
+      <p class="page-hero-subtitle">Discover luxury skincare, targeted hair treatments, and glowing facial kits.</p>
+    </div>
+  </section>
+
+  <!-- Shop Main Section -->
+  <main id="main-content" class="section-padding">
+    <div class="container">
+      
+      <!-- Mobile Filter Bar (Visible on Mobile) -->
+      <div class="filter-mobile-bar">
+        <button id="open-mobile-filter" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          FILTER
+        </button>
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted);" id="shop-product-count-mobile">Products</span>
+      </div>
+
+      <div class="shop-layout-container">
+        
+        <!-- Desktop Filter Sidebar -->
+        <aside class="shop-sidebar">
+          <div class="sidebar-header">
+            <h3 class="sidebar-title">Filters</h3>
+            <span class="reset-filter-btn" onclick="ShopLogic.resetFilters()">Clear All</span>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">Category</h4>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-label">
+                <input type="checkbox" name="category" value="skin-care">
+                <span>Skin Care</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" name="category" value="facial-kits">
+                <span>Facial Kits</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" name="category" value="hair-care">
+                <span>Hair Care</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" name="category" value="hair-treatment">
+                <span>Hair Treatment</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" name="category" value="self-care">
+                <span>Self Care</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">Price Range (₹)</h4>
+            <div class="price-inputs-row">
+              <input type="number" id="price-min" placeholder="Min" class="price-input-box">
+              <span>-</span>
+              <input type="number" id="price-max" placeholder="Max" class="price-input-box">
+            </div>
+          </div>
+
+          <!-- Skin / Hair Concern Filter (Populated dynamically) -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">Skin & Hair Concern</h4>
+            <div class="filter-checkbox-list" id="filter-concerns-desktop">
+              <!-- Populated dynamically by ShopLogic -->
+            </div>
+          </div>
+
+          <!-- Product Type Filter (Populated dynamically) -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">Product Type</h4>
+            <div class="filter-checkbox-list" id="filter-types-desktop">
+              <!-- Populated dynamically by ShopLogic -->
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Product Content Area -->
+        <section>
+          <!-- Top Control Toolbar (Search, Count, Sort) -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); flex-wrap: wrap; gap: 1rem;">
+            
+            <!-- Instant Search Input -->
+            <div style="position: relative; width: 280px; max-width: 100%;">
+              <input type="text" id="shop-search-input" class="search-input" placeholder="Search by name, concern, type..." autocomplete="off">
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+              <div id="shop-product-count" style="font-size: 0.9rem; font-weight: 600; color: var(--color-text-muted);">
+                Loading products...
+              </div>
+
+              <!-- Sorting Dropdown -->
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <label for="shop-sort-select" style="font-size: 0.85rem; color: var(--color-text-muted); white-space: nowrap;">Sort By:</label>
+                <select id="shop-sort-select" class="search-input" style="width: auto; height: 38px; padding-right: 1.5rem;">
+                  <option value="popular">Popular</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="newest">Newest</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Product Grid -->
+          <div id="shop-product-grid" class="product-grid-4">
+            <!-- Products rendered dynamically by shop.js -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Filter Drawer / Bottom Sheet -->
+  <div class="mobile-menu-overlay" id="mobile-filter-overlay"></div>
+  <aside class="mobile-filter-drawer" id="mobile-filter-drawer">
+    <div class="mobile-filter-header">
+      <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Filter Products</h3>
+      <button id="close-mobile-filter" style="font-size: 1.5rem; color: var(--color-text-main);">&times;</button>
+    </div>
+    <div class="mobile-filter-body">
+      <!-- Category Filter -->
+      <div class="filter-group">
+        <h4 class="filter-group-title">Category</h4>
+        <div class="filter-checkbox-list">
+          <label class="filter-checkbox-label">
+            <input type="checkbox" name="category-mobile" value="skin-care">
+            <span>Skin Care</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="checkbox" name="category-mobile" value="facial-kits">
+            <span>Facial Kits</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="checkbox" name="category-mobile" value="hair-care">
+            <span>Hair Care</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="checkbox" name="category-mobile" value="hair-treatment">
+            <span>Hair Treatment</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="checkbox" name="category-mobile" value="self-care">
+            <span>Self Care</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Concerns Filter -->
+      <div class="filter-group">
+        <h4 class="filter-group-title">Skin & Hair Concern</h4>
+        <div class="filter-checkbox-list" id="filter-concerns-mobile"></div>
+      </div>
+
+      <!-- Product Types Filter -->
+      <div class="filter-group">
+        <h4 class="filter-group-title">Product Type</h4>
+        <div class="filter-checkbox-list" id="filter-types-mobile"></div>
+      </div>
+    </div>
+    <div class="mobile-filter-footer">
+      <button class="btn btn-secondary btn-full" onclick="ShopLogic.resetFilters(); document.getElementById('close-mobile-filter').click();">Reset</button>
+      <button class="btn btn-primary btn-full" onclick="document.getElementById('close-mobile-filter').click();">Apply Filters</button>
+    </div>
+  </aside>
+
+  <!-- Mounted Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

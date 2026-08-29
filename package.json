@@ -1,0 +1,13 @@
+{
+  "name": "aroma-signature-plus",
+  "version": "1.0.0",
+  "description": "Aroma Signature+ — local dev server with persistent Admin CRUD file writes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
