@@ -91,14 +91,14 @@ const DEFAULT_SITE_CONFIG = {
 const DEFAULT_BANNER_SLIDES = [
   {
     id: "banner-1",
-    image: "Images/Banner.png",
-    subtitle: "✦ Nourish • Revive • Glow Naturally ✦",
-    title: "Elevate Your <span>Natural Glow</span>",
-    desc: "Indulge in premium botanical skincare, spa facial kits, and intense hair therapies crafted with nature's finest ingredients for radiant, healthy beauty.",
+    image: "Images/Banner1.png",
+    subtitle: "✦ Professional Beauty Care ✦",
+    title: "",
+    desc: "",
     ctaText: "Explore Collection",
     ctaUrl: "shop.html",
-    ctaText2: "Facial Kits",
-    ctaUrl2: "categories/facial-kits.html",
+    ctaText2: "",
+    ctaUrl2: "",
     enabled: true
   }
 ];
@@ -113,8 +113,14 @@ const DEFAULT_SHOWCASE_SLIDES = [
   { id: "showcase-6", img: "Images/Coursel/Papaya.png", title: "Papaya Blemish Care Kit", category: "Facial Kit", enabled: true },
   { id: "showcase-7", img: "Images/Coursel/Whitening.png", title: "Ultra Whitening Kit", category: "Facial Kit", enabled: true },
   { id: "showcase-8", img: "Images/Coursel/Vitamin C.png", title: "Vitamin C Brightening Kit", category: "Facial Kit", enabled: true },
-  { id: "showcase-9", img: "Images/Coursel/Fruit.png", title: "Fruit Extracts Revitalizing Kit", category: "Facial Kit", enabled: true },
-  { id: "showcase-10", img: "Images/Coursel/AntiA.png", title: "Anti-Aging Facial Kit", category: "Facial Kit", enabled: true }
+  { id: "showcase-9", img: "Images/Coursel/Dandruff.png", title: "Anti Dandruff Kit", category: "Facial Kit", enabled: true },
+  { id: "showcase-10", img: "Images/Coursel/Nanoplastia.png", title: "Nano Plastia Kit", category: "Facial Kit", enabled: true },
+  { id: "showcase-11", img: "Images/Coursel/Fruit.png", title: "Fruit Extracts Revitalizing Kit", category: "Facial Kit", enabled: true },
+  { id: "showcase-12", img: "Images/Coursel/AntiA.png", title: "Anti-Aging Facial Kit", category: "Facial Kit", enabled: true },
+  { id: "showcase-13", img: "Images/Coursel/Keratin.png", title: "Keratin Treatment", category: "Hair Treatment", enabled: true },
+  { id: "showcase-14", img: "Images/Coursel/Hairspa.png", title: "HairSpa Treatment", category: "Hair Treatment", enabled: true },
+  { id: "showcase-15", img: "Images/Coursel/Botox.png", title: "Botox Treatment", category: "Hair Treatment", enabled: true },
+
 ];
 
 // ─── Data Sync Engine (Local Database Integration) ────────────────────────────
@@ -135,7 +141,16 @@ function loadSyncedBannerSlides() {
     const saved = localStorage.getItem('admin_banners');
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        // Upgrade stale legacy banner reference if present
+        if (parsed[0] && (parsed[0].image === 'Images/Banner.png' || parsed[0].image === 'Images/banner.png')) {
+          parsed[0].image = 'Images/Banner1.png';
+          parsed[0].title = '';
+          parsed[0].desc = '';
+          localStorage.setItem('admin_banners', JSON.stringify(parsed));
+        }
+        return parsed;
+      }
     }
   } catch (e) {
     console.warn('Could not load stored banner slides', e);

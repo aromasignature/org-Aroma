@@ -49,9 +49,6 @@
     <!-- Phase 7: About Section -->
     <div id="about-section-mount"></div>
 
-    <!-- Phase 7: Trust Section -->
-    <div id="trust-mount"></div>
-
     <!-- Phase 7: FAQ Accordion -->
     <div id="faq-mount"></div>
   </main>
@@ -67,9 +64,6 @@
     document.addEventListener("DOMContentLoaded", () => {
       const aboutSectionMount = document.getElementById("about-section-mount");
       if (aboutSectionMount) aboutSectionMount.innerHTML = UIComponents.renderAboutSection();
-
-      const trustMount = document.getElementById("trust-mount");
-      if (trustMount) trustMount.innerHTML = UIComponents.renderTrustSection();
 
       const faqMount = document.getElementById("faq-mount");
       if (faqMount) faqMount.innerHTML = UIComponents.renderFAQSection();

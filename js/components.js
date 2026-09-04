@@ -135,27 +135,38 @@ const UIComponents = {
       ? getActiveBannerSlides()
       : ((typeof BANNER_SLIDES !== 'undefined' && BANNER_SLIDES.length)
         ? BANNER_SLIDES
-        : [{ image: 'Images/Banner.png', subtitle: '✦ Nourish • Revive • Glow Naturally ✦', title: 'Elevate Your <span>Natural Glow</span>', desc: "Indulge in premium botanical skincare, spa facial kits, and intense hair therapies.", ctaText: 'Explore Collection', ctaUrl: 'shop.html', ctaText2: 'Facial Kits', ctaUrl2: 'categories/facial-kits.html' }]);
+        : [{ image: 'Images/Banner 9.png', subtitle: '✦ Professional Beauty Care ✦', title: '', desc: '', ctaText: 'Explore Collection', ctaUrl: 'shop.html', ctaText2: '', ctaUrl2: '' }]);
 
-    const slidesHTML = slides.map((s, i) => `
+    const slidesHTML = slides.map((s, i) => {
+      const hasTextContent = Boolean((s.title && s.title.trim() !== '') || (s.desc && s.desc.trim() !== ''));
+      const slideUrl = s.ctaUrl || 'shop.html';
+
+      return `
       <div class="hero-slide ${i === 0 ? 'is-active' : ''}" data-index="${i}">
-        <div class="hero-banner-img-wrap">
-          <img src="${s.image}" alt="${s.subtitle || 'Aroma Signature+ Banner'}" loading="${i === 0 ? 'eager' : 'lazy'}">
-        </div>
+        <a href="${slideUrl}" class="hero-banner-img-wrap" aria-label="${s.subtitle || s.title || 'Aroma Signature+ Professional Beauty Care'}">
+          <img
+            src="${s.image}"
+            alt="${s.subtitle || s.title || 'Aroma Signature+ Professional Beauty Care Brand'}"
+            loading="${i === 0 ? 'eager' : 'lazy'}"
+            ${i === 0 ? 'fetchpriority="high"' : ''}
+          >
+        </a>
+        ${hasTextContent ? `
         <div class="hero-banner-overlay"></div>
         <div class="container">
           <div class="hero-content">
             ${s.subtitle ? `<span class="hero-tag">${s.subtitle}</span>` : ''}
-            <h1 class="hero-title">${s.title || ''}</h1>
+            <h1 class="hero-title">${s.title}</h1>
             ${s.desc ? `<p class="hero-description">${s.desc}</p>` : ''}
             <div class="hero-cta-group">
               ${s.ctaText ? `<a href="${s.ctaUrl || 'shop.html'}" class="btn btn-accent btn-lg">${s.ctaText}</a>` : ''}
               ${s.ctaText2 ? `<a href="${s.ctaUrl2 || 'shop.html'}" class="btn btn-secondary btn-lg" style="color:#FFF;border-color:rgba(255,255,255,0.4);">${s.ctaText2}</a>` : ''}
             </div>
           </div>
-        </div>
+        </div>` : ''}
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     const dotsHTML = slides.length > 1 ? `
       <div class="hero-dots">
@@ -241,6 +252,7 @@ const UIComponents = {
           { img: "Images/Coursel/Whitening.png", title: "Ultra Whitening Kit", category: "Facial Kit" },
           { img: "Images/Coursel/Vitamin C.png", title: "Vitamin C Facial Kit", category: "Facial Kit" },
           { img: "Images/Coursel/Fruit.png", title: "Fruit Facial Kit", category: "Facial Kit" },
+
         ]);
 
     return `
@@ -424,33 +436,9 @@ const UIComponents = {
     `;
   },
 
-  // ─── Phase 7: Trust Section ───────────────────────────────────────────────
+  // ─── Phase 7: Trust Section (Removed per specification) ───────────────────
   renderTrustSection: () => {
-    const trustItems = [
-      { icon: "🔒", title: "Secure Ordering", desc: "Direct WhatsApp SSL encrypted ordering flow" },
-      { icon: "🚚", title: "Free Delivery", desc: "Free delivery on all online orders across India" },
-      { icon: "💬", title: "WhatsApp Support", desc: "Instant customer service & order tracking" },
-      { icon: "✓", title: "Quality Products", desc: "Botanical & dermatologically tested formulas" },
-      { icon: "📦", title: "Easy Ordering", desc: "Quick checkout in under 30 seconds" }
-    ];
-
-    return `
-      <section class="trust-section">
-        <div class="container">
-          <div class="trust-grid">
-            ${trustItems.map(item => `
-              <div class="trust-card">
-                <div class="trust-icon">${item.icon}</div>
-                <div class="trust-info">
-                  <h4 class="trust-title">${item.title}</h4>
-                  <p class="trust-desc">${item.desc}</p>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </section>
-    `;
+    return "";
   },
 
   // ─── Phase 7: Customer Before & After Section ─────────────────────────────
@@ -828,7 +816,7 @@ const UIComponents = {
 
           <div class="footer-bottom">
             <p>&copy; ${new Date().getFullYear()} ${SITE_CONFIG.brandName}. All rights reserved. — ${SITE_CONFIG.tagline}</p>
-            <p>Designed for goDaddy Static Hosting</p>
+            <p>Designed by Neo Digital World</p>
           </div>
         </div>
       </footer>

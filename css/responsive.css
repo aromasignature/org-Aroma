@@ -84,7 +84,17 @@
   }
 
   .hero-banner {
-    min-height: 460px;
+    min-height: auto;
+    background-color: #F4ECE4;
+  }
+
+  .hero-slides-wrap {
+    min-height: 420px;
+    max-height: 540px;
+  }
+
+  .hero-banner-img-wrap img {
+    max-height: 540px;
   }
 
   .carousel-slide-img {
@@ -99,18 +109,6 @@
   .reviews-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.2rem;
-  }
-
-  /* Phase 7 Tablet Breakpoints */
-  .trust-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-  }
-
-  .trust-card {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.8rem;
   }
 
   .before-after-grid,
@@ -193,16 +191,30 @@
 
   /* Hero Mobile */
   .hero-banner {
-    min-height: 420px;
+    min-height: auto;
+    background-color: #F4ECE4;
+  }
+
+  .hero-slides-wrap {
+    min-height: 280px;
+    max-height: 420px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-banner-img-wrap img {
+    max-height: 420px;
+    object-fit: cover;
+    object-position: center right;
   }
 
   .hero-banner-overlay {
-    background: linear-gradient(180deg, rgba(14, 38, 10, 0.88) 0%, rgba(14, 38, 10, 0.95) 100%);
+    background: linear-gradient(180deg, rgba(20, 61, 12, 0.75) 0%, rgba(20, 61, 12, 0.3) 50%, rgba(20, 61, 12, 0.9) 100%);
+    pointer-events: none;
   }
 
   .hero-content {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     text-align: center;
   }
 
@@ -308,17 +320,6 @@
   }
 
   /* Phase 7 Mobile Breakpoints */
-  .trust-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .trust-card {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
-    padding: 0.6rem 0;
-  }
-
   .before-after-grid,
   .reviews-grid-3 {
     grid-template-columns: 1fr;
@@ -385,7 +386,16 @@
   }
 
   .hero-banner {
-    min-height: 380px;
+    min-height: auto;
+  }
+
+  .hero-slides-wrap {
+    min-height: 250px;
+    max-height: 340px;
+  }
+
+  .hero-banner-img-wrap img {
+    max-height: 340px;
   }
 
   .carousel-slide-img {

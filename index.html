@@ -84,9 +84,6 @@
     <!-- 3. Promotional Hero Banner -->
     <div id="hero-mount"></div>
 
-    <!-- Phase 7: Trust Guarantee Bar -->
-    <div id="trust-mount"></div>
-
     <!-- 4. Benefits & Features Section ("In The Goodness Of Non-Toxic Beauty") -->
     <div id="benefits-mount"></div>
 
@@ -129,9 +126,6 @@
         heroMount.innerHTML = UIComponents.renderHeroBanner();
         if (typeof HeroCarousel !== 'undefined') HeroCarousel.init();
       }
-
-      const trustMount = document.getElementById("trust-mount");
-      if (trustMount) trustMount.innerHTML = UIComponents.renderTrustSection();
 
       const benefitsMount = document.getElementById("benefits-mount");
       if (benefitsMount) benefitsMount.innerHTML = UIComponents.renderBenefitsSection();
