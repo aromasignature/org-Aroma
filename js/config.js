@@ -91,7 +91,7 @@ const DEFAULT_SITE_CONFIG = {
 const DEFAULT_BANNER_SLIDES = [
   {
     id: "banner-1",
-    image: "Images/Banner1.png",
+    image: "Images/Banner 9.png",
     subtitle: "✦ Professional Beauty Care ✦",
     title: "",
     desc: "",
@@ -143,8 +143,8 @@ function loadSyncedBannerSlides() {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length > 0) {
         // Upgrade stale legacy banner reference if present
-        if (parsed[0] && (parsed[0].image === 'Images/Banner.png' || parsed[0].image === 'Images/banner.png')) {
-          parsed[0].image = 'Images/Banner1.png';
+        if (parsed[0] && (parsed[0].image === 'Images/Banner.png' || parsed[0].image === 'Images/banner.png' || parsed[0].image === 'Images/Banner1.png' || parsed[0].image === 'Images/Banner1.jpg')) {
+          parsed[0].image = 'Images/Banner 9.png';
           parsed[0].title = '';
           parsed[0].desc = '';
           localStorage.setItem('admin_banners', JSON.stringify(parsed));
