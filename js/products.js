@@ -1115,9 +1115,11 @@ let PRODUCTS_DATA = [
     "rating": 4.8,
     "reviewCount": 142,
     "packs": [
-      "500ml"
+      "250ml",
+      "500ml",
     ],
     "packPrices": [
+      600,
       1200
     ],
     "concerns": [
